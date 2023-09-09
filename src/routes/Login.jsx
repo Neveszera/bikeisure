@@ -1,18 +1,12 @@
-import { Link } from "react-router-dom";
-
 export default function Login(){
     
     return(
         <div>
             <form>
             <h1>Login</h1>
-            <label>
-            Email: <input name="email" type="text" />
-          </label>
-          <label>
-            Senha: <input name="senha" type="password" />
-          </label>
-          <Button href="#">Logar</Button>
+            <input name="email" type="text" placeholder="Email" />
+            <input name="senha" type="password" placeholder="Senha"/>
+          <button href="#">Logar</button>
             </form>
         </div>
     )
