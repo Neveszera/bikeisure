@@ -8,14 +8,12 @@ function Header() {
       <>
        <header>
             <ul>
-                <li><Link to="/">Início</Link></li>
-                <li><Link to="">Processo</Link></li>
-                <li><Link to="">Planos</Link></li>
-                <li>
-                  <Link to="/sobre">Sobre</Link>
-                </li>
-                <li><Link to="">Contato</Link></li>
-                <li><Link to="/login">Entrar</Link></li>
+                <Link to="/">Início</Link>
+                <Link to="">Processo</Link>
+                <Link to="">Planos</Link>
+                <Link to="/sobre">Sobre</Link>
+                <Link to="">Contato</Link>
+                <Link to="/login">Entrar</Link>
             </ul>
         </header>
       </>
