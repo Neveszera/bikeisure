@@ -6,6 +6,8 @@ import Login from './routes/Login.jsx';
 import Error from './routes/Error.jsx';
 import Sobre from './routes/sobre.jsx';
 import Contato from './routes/Contato.jsx';
+import Home from './routes/Home.jsx';
+
 
 
 const router = createBrowserRouter([
@@ -14,13 +16,14 @@ const router = createBrowserRouter([
     children:[
       {path: '/login', element: <Login/>},
       {path: '/sobre', element: <Sobre/>}, 
-      {path: '/contato', element: <Contato/>}
+      {path: '/contato', element: <Contato/>},
+      {path: '/', element: <Home/>}
     ]
   }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-       <RouterProvider router={router}/>
+      <RouterProvider router={router}/>
   </React.StrictMode>,
 )
