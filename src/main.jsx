@@ -4,13 +4,15 @@ import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Login from './routes/Login.jsx';
 import Error from './routes/Error.jsx';
+import Sobre from './routes/sobre.jsx';
 
 
 const router = createBrowserRouter([
   {path: '/', element: <App/>,
   errorElement: <Error/>,
     children:[
-      {path: '/login', element: <Login/>}
+      {path: '/login', element: <Login/>},
+      {path: '/sobre', element: <Sobre/>}
     ]
   }
 ]);
