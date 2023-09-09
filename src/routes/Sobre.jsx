@@ -1,12 +1,10 @@
-import Header from '../components/Header.jsx'
-import Footer from '../components/Footer.jsx'
+
 
 
 
 export default function sobre() {
     return (
         <>
-            <Header/>
 
             <section>
                 <div>
@@ -17,7 +15,6 @@ export default function sobre() {
             </section>
 
             
-            <Footer/>
 
 
 
