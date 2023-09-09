@@ -6,11 +6,9 @@ function Header() {
 
     return (
       <>
-       <header>
+      <header>
             <ul>
                 <Link to="/">Início</Link>
-                <Link to="">Processo</Link>
-                <Link to="">Planos</Link>
                 <Link to="/sobre">Sobre</Link>
                 <Link to="">Contato</Link>
                 <Link to="/login">Entrar</Link>

@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Login from './routes/Login.jsx';
 import Error from './routes/Error.jsx';
 import Sobre from './routes/sobre.jsx';
+import Contato from './routes/Contato.jsx';
 
 
 const router = createBrowserRouter([
@@ -12,7 +13,8 @@ const router = createBrowserRouter([
   errorElement: <Error/>,
     children:[
       {path: '/login', element: <Login/>},
-      {path: '/sobre', element: <Sobre/>}
+      {path: '/sobre', element: <Sobre/>}, 
+      {path: '/contato', element: <Contato/>}
     ]
   }
 ]);
