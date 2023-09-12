@@ -1,99 +1,100 @@
-/* Estilo base */
 .hero {
-    display: flex;
-    align-items: center;
-    background-color: #fff;
-    padding: 20px;
-    max-width: 1250px;
-    width: 100%;
-    margin: 0 auto;
-  }
-  
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  padding: 40px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.hero-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.hero-text {
+  text-align: left;
+  max-width: 50%;
+}
+
+.hero-image img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hero-text h1 {
+  font-size: 48px;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 20px;
+  color: #666B6F;
+}
+
+.hero-text p {
+  font-size: 30px;
+  font-weight: 400;
+  font-family: 'Raleway', sans-serif;
+  margin-bottom: 20px;
+  color: #929A9D;
+}
+
+.hero-text button {
+  background-color: #4481EB;
+  color: #fff;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 15px;
+  font-size: 24px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.6s, transform 0.3s;
+  margin: 20px auto;
+}
+
+.hero-text button:hover {
+  background-color: #373535;
+  transform: scale(1.05);
+}
+
+/* -------------------------------Planos ------------------------------- */
+
+.planos {
+  background-color: #fff;
+}
+
+
+@media (max-width: 766px) {
   .hero-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
-  
-  .hero-text {
-    text-align: left;
-    max-width: 50%;
-  }
-  
-  .hero-image img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-  }
-  
-  .hero-text h1 {
-    font-size: 48px;
-    font-weight: 700;
-    font-family: 'Montserrat', sans-serif;
-    margin-bottom: 20px;
-    color: #666B6F;
-  }
-  
-  .hero-text p {
-    font-size: 30px;
-    font-weight: 400;
-    font-family: 'Raleway', sans-serif;
-    margin-bottom: 20px;
-    color: #929A9D;
-  }
-  
-  .hero-text button {
-    background-color: #4481EB;
-    color: #fff;
-    border: none;
-    padding: 15px 30px;
-    border-radius: 15px;
-    font-size: 24px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.6s, transform 0.3s;
-    margin: 20px auto;
-  }
-  
-  .hero-text button:hover {
-    background-color: #373535;
-    transform: scale(1.05);
+    flex-direction: column;
+    text-align: center;
   }
 
-  
-  /* Responsividade para telas menores que 766px */
-  @media (max-width: 766px) {
-    .hero-content {
-      flex-direction: column; /* Empilha elementos verticalmente */
-      text-align: center; /* Centraliza o texto e a imagem */
-    }
-  
-    .hero-text {
-      max-width: 80%; /* Reduz a largura do texto para telas menores */
-      text-align: center; /* Centraliza o texto */
-      margin: 0 auto; /* Centraliza o bloco de texto */
-    }
-  
-    .hero-image img {
-      max-width: 60%; /* Reduz o tamanho da imagem para telas menores */
-      margin: 20px auto; /* Centraliza a imagem horizontalmente */
-    }
-  
-    /* Ajuste o estilo do botão para se adequar à pilha vertical */
-    .hero-text button {
-      margin-top: 20px;
-    }
+  .hero-text {
+    max-width: 80%;
+    text-align: center;
+    margin: 0 auto;
   }
-  
-  /* Responsividade para telas maiores que 766px */
-  @media (min-width: 767px) {
-    .hero-content {
-      flex-direction: row; /* Retorna à direção horizontal para telas maiores */
-    }
-  
-    .hero-text {
-      max-width: 50%; /* Restaura a largura original do texto */
-    }
+
+  .hero-image img {
+    max-width: 60%;
+    margin: 20px auto;
   }
-  
+
+  .hero-text button {
+    margin-top: 20px;
+  }
+}
+
+/* Responsividade para telas maiores que 766px */
+@media (min-width: 767px) {
+  .hero-content {
+    flex-direction: row;
+  }
+
+  .hero-text {
+    max-width: 50%;
+  }
+}

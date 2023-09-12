@@ -11,19 +11,20 @@ import Home from './routes/Home/Home.jsx';
 
 
 const router = createBrowserRouter([
-  {path: '/', element: <App/>,
-  errorElement: <Error/>,
-    children:[
-      {path: '/', element: <Home/>},
-      {path: '/login', element: <Login/>},
-      {path: '/sobre', element: <Sobre/>}, 
-      {path: '/contato', element: <Contato/>}
+  {
+    path: '/', element: <App />,
+    errorElement: <Error />,
+    children: [
+      { path: '/', element: <Home /> },
+      { path: '/login', element: <Login /> },
+      { path: '/sobre', element: <Sobre /> },
+      { path: '/contato', element: <Contato /> }
     ]
   }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-      <RouterProvider router={router}/>
+    <RouterProvider router={router} />
   </React.StrictMode>,
 )
