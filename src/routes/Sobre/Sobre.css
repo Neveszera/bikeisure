@@ -43,9 +43,10 @@
   }
   /* -------------------------------- Cards Equipe -------------------------------- */
   
-  h1{
+  h2{
+    margin-left: 20px;
     font-size: 48px;
-    font-weight: 400;
+    font-weight: 700;
     font-family: 'Montserrat', sans-serif;
     margin-bottom: 20px;
     color: #666B6F;

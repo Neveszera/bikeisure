@@ -82,7 +82,7 @@ export default function Sobre() {
                     </div>
                 </div>
             </section>
-            <h1>Equipe Bikeisure</h1>
+            <h2>Equipe Bikeisure</h2>
             <section className="equipe">
                 {membrosDaEquipe.map((membro) => (
                     <div className="card" style={{ backgroundColor: membro.cor }} key={membro.id}>
