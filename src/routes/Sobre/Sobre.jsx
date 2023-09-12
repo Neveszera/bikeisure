@@ -4,6 +4,9 @@ import Footer from '../../components/Footer';
 import Ciclista2 from '../../assets/img/ciclista2.png';
 import Neves from '../../assets/img/equipe/Neves.jpg'
 import Renata from '../../assets/img/equipe/Renata.jpeg'
+import Daniel from '../../assets/img/equipe/Daniel.png'
+import Sampaio from '../../assets/img/equipe/Sampaio.png'
+import Rafael from '../../assets/img/equipe/Rafael.jpg'
 
 import './Sobre.css';
 
@@ -37,33 +40,36 @@ const membrosDaEquipe = [
         nome: "Rafael Henrique",
         rm: "RM552422",
         turma: "1TDSPM",
-        funcao: "Web Developer",
+        cor: "black",
+        funcao: "Automation with Python",
         linkedin: 'https://www.linkedin.com/in/rafael-henrique-de-mendon%C3%A7a-51263326b/',
         instagram: 'https://www.instagram.com/rafaelhm015/',
         github: 'https://github.com/rhmendonca',
-        imagem: Neves,
+        imagem: Rafael,
     },
     {
         id: 4,
         nome: "Daniel Stuart",
-        rm: "RM",
+        rm: "RM550897",
         turma: "1TDSPI",
         funcao: "Java Developer",
-        linkedin: '#',
-        instagram: '#',
-        github: '#',
-        imagem: Neves,
+        cor: "red",
+        linkedin: 'https://www.linkedin.com/in/daniel-monteiro-731267275/',
+        instagram: 'https://instagram.com/_daniel_stuart?igshid=NGVhN2U2NjQ0Yg==',
+        github: 'https://github.com/DanielStuart2',
+        imagem: Daniel,
     },
     {
         id: 5,
         nome: "Gabriel Sampaio",
         rm: "RM",
         turma: "1TDSPI",
-        funcao: "",
-        linkedin: '#',
+        funcao: "Automation with Python",
+        cor: "black",
+        linkedin: 'https://www.linkedin.com/in/gabrielsampaiogianini/',
         instagram: '#',
         github: '#',
-        imagem: Neves,
+        imagem: Sampaio,
     },
 ];
 
@@ -82,6 +88,8 @@ export default function Sobre() {
                         <p>
                             Nossa visão é ser líder no setor, fornecendo soluções adaptadas às necessidades individuais dos ciclistas. Entre em contato conosco e desfrute de uma proteção completa para suas pedaladas, com o atendimento personalizado que você merece.
                         </p>
+                        <br />
+                        <h1>Nossa Equipe:</h1>
                     </div>
                     <div className="sobre-image">
                         <img src={Ciclista2} alt="Desenho Ciclista" />
