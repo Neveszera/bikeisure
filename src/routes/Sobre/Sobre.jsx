@@ -85,7 +85,7 @@ export default function Sobre() {
             <h2>Equipe Bikeisure</h2>
             <section className="equipe">
                 {membrosDaEquipe.map((membro) => (
-                    <div className="card" style={{ backgroundColor: membro.cor }} key={membro.id}>
+                    <div className="card" style={{ backgroundColor: membro.cor}} key={membro.id}>
                         <img src={membro.imagem} alt={`Foto de ${membro.nome}`} />
                         <h3>{membro.nome}</h3>
                         <p>RM: {membro.rm}</p>
