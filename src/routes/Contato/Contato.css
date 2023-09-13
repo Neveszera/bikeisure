@@ -1,0 +1,88 @@
+.contato-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+  color: #666B6F;
+  font-family: Arial, sans-serif;
+}
+
+.contato-text {
+  max-width: 100%;
+  padding: 20px;
+  text-align: center;
+}
+
+.contato-text h1 {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.contato-text p {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.contato-form {
+  max-width: 100%;
+  width: 100%;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #4481EB;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+  max-height: 300px;
+}
+
+.contato-form button {
+  background-color: #4481EB;
+  color: #fff;
+  border: 1px solid #4481EB;
+  padding: 12px 30px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Media queries para tornar o formulário responsivo */
+@media (max-width: 768px) {
+  .contato-container {
+    text-align: center;
+  }
+
+  .contato-text {
+    max-width: 100%;
+  }
+
+  .contato-form {
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,136 @@
+.sobre {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  padding: 20px;
+}
+
+.sobre-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1250px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.sobre-image img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  /* Centralize a imagem horizontalmente */
+}
+
+.sobre-text {
+  text-align: left;
+  max-width: 50%;
+}
+
+.sobre-text h1 {
+  font-size: 48px;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 20px;
+  color: #666B6F;
+}
+
+.sobre-text p {
+  font-size: 30px;
+  font-weight: 400;
+  font-family: 'Raleway', sans-serif;
+  margin-bottom: 20px;
+  color: #929A9D;
+}
+
+/* -------------------------------- Cards Equipe -------------------------------- */
+
+h2 {
+  margin-left: 20px;
+  font-size: 48px;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 20px;
+  color: #666B6F;
+}
+
+section.equipe {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+
+.card {
+  width: 350px;
+  margin: 20px;
+  padding: 20px;
+  background-color: #4481EB;
+  border-radius: 25px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card img {
+  max-width: 100%;
+  border-radius: 10%;
+  margin-bottom: 15px;
+}
+
+.card h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.card p {
+  font-size: 16px;
+  margin: 5px 0;
+  color: #fff;
+}
+
+.card .redes-sociais a {
+  font-size: 24px;
+  margin: 0 10px;
+  color: #373535;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+.card .redes-sociais a:hover {
+  color: #fff;
+}
+
+@media (max-width: 766px) {
+  .sobre-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .sobre-image img {
+    max-width: 80%;
+    margin-top: 20px;
+  }
+
+  .sobre-text h1 {
+    font-size: 36px;
+    margin-top: 20px;
+  }
+
+  .sobre-text p {
+    font-size: 24px;
+    margin: 10px 0;
+  }
+
+  .sobre-text {
+    max-width: 80%;
+  }
+}

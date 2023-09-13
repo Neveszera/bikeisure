@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&family=Montserrat:wght@300;400;500;600;700&family=Raleway:wght@500;700&family=Righteous&display=swap');
+
+
+.footer {
+  background-color: #373535;
+  color: #fff;
+  padding: 20px 0;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.social-links {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.social-links li {
+  margin-right: 20px;
+}
+
+.social-links a {
+  text-decoration: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+
+.social-links a svg {
+  margin-right: 5px;
+  font-size: 24px;
+}
+
+p {
+  color: #fff;
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+@media (max-width: 551px) {
+  .footer {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .social-links {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .social-links li {
+    align-items: center;
+    justify-content: center;
+    margin-left: 40px;
+    margin-bottom: 10px;
+    flex: 1;
+    max-width: 50%;
+    box-sizing: border-box;
+  }
+}

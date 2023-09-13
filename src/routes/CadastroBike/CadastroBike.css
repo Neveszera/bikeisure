@@ -1,0 +1,64 @@
+
+.cadastro-bike-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0; 
+  }
+  
+  .cadastro-bike-content {
+    background-color: #fff; 
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    width: 80%; 
+    max-width: 600px;
+    text-align: center;
+  }
+  
+  .cadastro-bike-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333; 
+    margin-bottom: 20px;
+  }
+  
+  .cadastro-bike-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .cadastro-bike-form label {
+    font-size: 18px;
+    color: #333; 
+    margin-bottom: 10px;
+  }
+  
+  .cadastro-bike-form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-size: 16px;
+  }
+  
+  .cadastro-bike-button {
+    margin-top: 20px;
+  }
+  
+  .cadastro-bike-button button {
+    background-color: #4481EB; 
+    color: #fff; 
+    font-size: 18px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .cadastro-bike-button button:hover {
+    background-color: #3579CC; 
+  }
+  

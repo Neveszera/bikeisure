@@ -1,0 +1,148 @@
+.hero {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.hero-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.hero-text {
+  text-align: center;
+  max-width: 50%;
+}
+
+.hero-image img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hero-text h1 {
+  font-size: 45px;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 20px;
+  color: #666B6F;
+}
+
+.hero-text p {
+  font-size: 30px;
+  font-weight: 400;
+  font-family: 'Raleway', sans-serif;
+  margin-bottom: 20px;
+  color: #929A9D;
+}
+
+.hero-text button {
+  background-color: #4481EB;
+  color: #fff;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 15px;
+  font-size: 24px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.6s, transform 0.3s;
+  margin: 20px auto;
+}
+
+.hero-text button:hover {
+  background-color: #373535;
+  transform: scale(1.05);
+}
+
+/* -------------------------------Planos ------------------------------- */
+
+.planos {
+  background-color: #fff;
+}
+
+
+@media (max-width: 766px) {
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-text {
+    max-width: 80%;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .hero-image img {
+    max-width: 60%;
+    margin: 20px auto;
+  }
+
+  .hero-text button {
+    margin-top: 20px;
+  }
+}
+
+/* Responsividade para telas maiores que 766px */
+@media (min-width: 767px) {
+  .hero-content {
+    flex-direction: row;
+  }
+
+  .hero-text {
+    max-width: 50%;
+  }
+}
+
+
+/* Estilo padrão para a seção FAQ */
+.faq {
+  background-color: #f5f5f5;
+  padding: 20px;
+  text-align: center;
+}
+
+.faq h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: 4481EB;
+}
+
+.faq-item {
+  margin-bottom: 20px;
+}
+
+.faq-item h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.faq-item p {
+  font-size: 16px;
+  color: #373535;
+}
+
+/* Estilo responsivo para telas menores (por exemplo, dispositivos móveis) */
+@media screen and (max-width: 768px) {
+  .faq {
+    padding: 10px;
+  }
+
+  .faq h1 {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  .faq-item h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  .faq-item p {
+    font-size: 14px;
+  }
+}

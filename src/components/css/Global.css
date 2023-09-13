@@ -1,0 +1,19 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+  }
+
+   ::-webkit-scrollbar {
+    width: 10px;
+    background-color: white;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #929A9D ;
+    border-radius: 50px;
+}
