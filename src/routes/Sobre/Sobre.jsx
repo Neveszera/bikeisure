@@ -65,7 +65,7 @@ const membrosDaEquipe = [
         rm: "RM",
         turma: "1TDSPI",
         funcao: "Automation with Python",
-        cor: "black",
+        cor: "yellow",
         linkedin: 'https://www.linkedin.com/in/gabrielsampaiogianini/',
         instagram: '#',
         github: '#',

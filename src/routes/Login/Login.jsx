@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './Login.css';
 
 export default function Login() {
@@ -23,7 +24,7 @@ export default function Login() {
             <div className="pass">Esqueceu a senha? Clique aqui!</div>
             <input type="submit" value="Logar" />
             <div className="signup_link">
-              Não tem uma conta? <a href="./cadastro.html">Cadastre-se</a>
+              Não tem uma conta? <Link to="/cadastro">Cadastre-se</Link>
             </div>
           </form>
         </div>
