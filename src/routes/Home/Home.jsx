@@ -20,7 +20,7 @@ export default function Home() {
           <div className="hero-text">
             <h1>Pedale com confiança, proteção em cada trajeto.</h1>
             <p>Na Bikeisure, oferecemos seguros abrangentes para proteger suas pedaladas e o que você mais ama.</p>
-            <Link to="/inicio">
+            <Link to="/cadastro">
               <button>Contratar Agora</button>
             </Link>
           </div>
