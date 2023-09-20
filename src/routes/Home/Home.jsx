@@ -4,7 +4,7 @@ import Footer from '../../components/Footer';
 import { Link } from 'react-router-dom';
 import Ciclista from '../../assets/img/ciclista.png';
 import PlanosCarousel from '../../components/PlanosCarousel.jsx'
-import Faq from '../../components/FAQ.jsx'
+import Faq from '../../components/Faq.jsx'
 import './Home.css';
 
 export default function Home() {
