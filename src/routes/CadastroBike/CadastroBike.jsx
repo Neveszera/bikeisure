@@ -1,6 +1,6 @@
-// CadastroBike.jsx
 import React from 'react';
 import { useFormik } from 'formik';
+import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import './CadastroBike.css';
 
@@ -12,9 +12,7 @@ const CadastroBike = () => {
             .positive('Deve ser um número positivo')
             .integer('Deve ser um número inteiro'),
         fabricante: Yup.string().required('Campo obrigatório'),
-        numeroSerie: Yup.string().required('Campo obrigatório'),
-        notaFiscal: Yup.mixed()
-            .required('Campo obrigatório')
+        numeroSerie: Yup.string().required('Campo obrigatório')
             .test('fileSize', 'A nota fiscal é muito grande. O tamanho máximo permitido é 5MB.', (value) => {
                 if (!value) return true; // Permite que seja vazio
                 return value.size <= 5000000;
@@ -54,11 +52,13 @@ const CadastroBike = () => {
     return (
         <div className="cadastro-container">
             <div className="left-column">
-                <h1>Bikeisure</h1>
-                <h3>Etapa 2 - 4</h3>
-                <p>
-                    Preencha o formulário ao lado com as informações da bike assegurada para prosseguimento da abertura do seguro.
-                </p>
+                <div className="d-shape">
+                    <div className="text-content">
+                        <h1>Bikeisure</h1>
+                        <h3>Etapa 2 - 4</h3>
+                        <p>Preencha o formulário ao lado com as informações da bike assegurada para prosseguimento da abertura do seguro.</p>
+                    </div>
+                </div>
             </div>
 
             <div className="right-column">
@@ -82,7 +82,7 @@ const CadastroBike = () => {
                     <div className="form-group">
                         <label htmlFor="anoFabricacao">Ano de Fabricação</label>
                         <input
-                            type="number"
+                            type="text"
                             id="anoFabricacao"
                             name="anoFabricacao"
                             value={formik.values.anoFabricacao}
@@ -160,8 +160,9 @@ const CadastroBike = () => {
                             <div className="error-message">{formik.errors.outrasNotasFiscais}</div>
                         ) : null}
                     </div>
-
-                    <button type="submit">Próxima Etapa</button>
+                    <Link to="/cadastro/cadastrobike/vistoria">
+                        <button type="submit">Próxima Etapa</button>
+                    </Link>
                 </form>
             </div>
         </div>

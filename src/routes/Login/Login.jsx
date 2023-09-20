@@ -10,7 +10,7 @@ export default function Login() {
           <h1>Entrar</h1>
           <form method="post">
             <div className="txt_field">
-              <input type="email" required name="email" maxLength="40" />
+              <input type="emailLogin" required name="emailLogin" maxLength="40" />
               <span></span>
               <label>Email</label>
             </div>

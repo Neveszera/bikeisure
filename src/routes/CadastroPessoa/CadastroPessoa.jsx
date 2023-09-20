@@ -1,6 +1,7 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { Link } from 'react-router-dom';
 import './CadastroPessoa.css';
 
 const CadastroPessoa = () => {
@@ -45,9 +46,13 @@ const CadastroPessoa = () => {
   return (
     <div className="cadastro-container">
       <div className="left-column">
-        <h1>Bikeisure</h1>
-        <h3>Etapa 1 - 4</h3>
-        <p>Preencha o formulário ao lado com seus dados pessoais para prosseguimento da abertura do seguro</p>
+        <div className="d-shape">
+          <div className="text-content">
+            <h1>Bikeisure</h1>
+            <h3>Etapa 1 - 4</h3>
+            <p>Preencha o formulário com seus dados pessoais para criar uma conta.</p>
+          </div>
+        </div>
       </div>
       <div className="right-column">
         <form onSubmit={formik.handleSubmit}>
@@ -179,15 +184,16 @@ const CadastroPessoa = () => {
                 checked={formik.values.concordarTermos}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-              />{' '}
+              />{''}
               Concordo com os termos e condições
             </label>
             {formik.touched.concordarTermos && formik.errors.concordarTermos ? (
               <div className="error-message">{formik.errors.concordarTermos}</div>
             ) : null}
           </div>
-
-          <button type="submit">Próxima Etapa</button>
+          <Link to="/cadastro/cadastrobike">
+            <button type="submit">Próxima Etapa</button>
+          </Link>
         </form>
       </div>
     </div>

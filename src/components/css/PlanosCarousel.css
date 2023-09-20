@@ -1,23 +1,27 @@
-.planos {
-  background-color: #4481EB;
+.planos-carousel {
+  background-color: #333;
   padding-top: 50px;
   text-align: center;
+  height: 600px; /* Altura desejada */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.planos h1 {
+.planos-carousel h1 {
   font-size: 32px;
   margin-bottom: 20px;
-  color: #333;
+  color: #fff;
 }
 
-.carousel-root {
-  max-width: 50%;
-  margin: 0 auto;
+.carousel-wrapper {
+  max-width: 60%;
   position: relative;
 }
 
 .carousel .slide {
-  background-color: #4481EB;
+  background-color: #fff;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -27,15 +31,14 @@
 .carousel .slide h3 {
   font-size: 24px;
   margin-bottom: 10px;
-  color: #fff;
+  color: #333;
 }
 
 .carousel .slide p {
   font-size: 16px;
   margin: 5px 0;
-  color: #fff;
+  color: #333;
 }
-
 
 .carousel-button {
   position: absolute;
@@ -67,7 +70,7 @@
 
 /* Responsividade */
 @media (max-width: 768px) {
-  .carousel-root {
+  .carousel-wrapper {
     max-width: 90%;
   }
 
