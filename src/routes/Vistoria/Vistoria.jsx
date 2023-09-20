@@ -1,56 +1,45 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Webcam from 'react-webcam';
-import * as cocoSsd from '@tensorflow-models/coco-ssd';
-import Modal from 'react-modal';
+import * as tf from '@tensorflow/tfjs';
+import * as cocossd from '@tensorflow-models/coco-ssd';
 import './Vistoria.css';
-
-Modal.setAppElement('#root');
 
 const Vistoria = () => {
   const [capturedImage, setCapturedImage] = useState(null);
-  const [validationResult, setValidationResult] = useState(null);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const webcamRef = useRef(null);
+  const [objectDetected, setObjectDetected] = useState(null);
+  const webcamRef = React.useRef(null);
 
-  useEffect(() => {
-    if (capturedImage) {
-      validateImage();
-    }
-  }, [capturedImage]);
+  const captureImage = async () => {
+    const imageSrc = webcamRef.current.getScreenshot();
+    setCapturedImage(imageSrc);
 
-  const detectObjects = async (imageData) => {
-    const imageElement = document.createElement('img');
-    imageElement.src = imageData;
+    // Carrega o modelo COCO-SSD
+    const model = await cocossd.load();
 
-    const model = await cocoSsd.load();
-    const predictions = await model.detect(imageElement);
+    // Carrega a imagem capturada como um elemento HTMLImageElement
+    const imgElement = document.createElement('img');
+    imgElement.src = imageSrc;
+    await imgElement.decode();
 
-    return predictions;
-  };
+    // Detecta objetos na imagem
+    const predictions = await model.detect(imgElement);
 
-  const validateImage = async () => {
-    const predictions = await detectObjects(capturedImage);
-    const isBicycleDetected = predictions.some((prediction) =>
+    // Verifica se a bicicleta foi detectada
+    const bicycleDetected = predictions.some((prediction) =>
       prediction.class === 'bicycle'
     );
 
-    if (isBicycleDetected) {
-      setValidationResult('Validação da foto completa: Contém uma bicicleta.');
+    if (bicycleDetected) {
+      setObjectDetected('bicicleta encontrada');
     } else {
-      setValidationResult('Validação incompleta: Nenhuma bicicleta detectada. Tente novamente.');
+      setObjectDetected('sem bicicleta');
     }
-
-    setModalIsOpen(true);
   };
 
-  const captureImage = () => {
-    const imageSrc = webcamRef.current.getScreenshot();
-    setCapturedImage(imageSrc);
-  };
-
-  const closeModal = () => {
-    setModalIsOpen(false);
-  };
+  useEffect(() => {
+    // Configure o backend do TensorFlow.js (pode ser 'webgl', 'wasm', etc.)
+    tf.setBackend('webgl');
+  }, []);
 
   return (
     <div className="vistoria-container">
@@ -63,7 +52,9 @@ const Vistoria = () => {
       <div className="vistoria-content">
         {capturedImage ? (
           <div>
-            <button onClick={captureImage}>Recapturar Imagem</button>
+            <h2>Imagem Capturada:</h2>
+            <img src={capturedImage} alt="Imagem Capturada" className="captured-image" />
+            <p className="object-detected">{objectDetected}</p>
           </div>
         ) : (
           <div>
@@ -73,7 +64,7 @@ const Vistoria = () => {
               screenshotFormat="image/jpeg"
               className="webcam"
             />
-            <button onClick={captureImage}>Capturar Imagem</button>
+            <button onClick={captureImage} className="capture-button">Capturar Imagem</button>
           </div>
         )}
       </div>
@@ -81,23 +72,6 @@ const Vistoria = () => {
       <div className="vistoria-button">
         <button>Próxima Etapa</button>
       </div>
-
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        contentLabel="Resultado da Validação"
-        className="modal"
-      >
-        <h2>Resultado da Validação</h2>
-        {capturedImage && (
-          <div>
-            <h3>Imagem Capturada:</h3>
-            <img src={capturedImage} alt="Imagem Capturada" />
-          </div>
-        )}
-        {validationResult && <p>{validationResult}</p>}
-        <button onClick={closeModal}>Fechar</button>
-      </Modal>
     </div>
   );
 };
