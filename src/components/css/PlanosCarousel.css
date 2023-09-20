@@ -21,6 +21,7 @@
 }
 
 .carousel .slide {
+  margin-top: 0;
   background-color: #fff;
   padding: 20px;
   border-radius: 10px;
@@ -41,16 +42,12 @@
 }
 
 .carousel-button {
-  position: absolute;
-  top: 50%;
   transform: translateY(-50%);
   font-size: 28px;
-  background: rgba(255, 255, 255, 0.8);
   border: none;
   cursor: pointer;
-  z-index: 1000;
+  background-color: rgba(255, 255, 255, 0.95);
   padding: 5px 10px;
-  border-radius: 50%;
   color: #333;
   transition: background-color 0.3s ease-in-out;
 }
