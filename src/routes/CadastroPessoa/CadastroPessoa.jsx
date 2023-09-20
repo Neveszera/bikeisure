@@ -191,8 +191,9 @@ const CadastroPessoa = () => {
               <div className="error-message">{formik.errors.concordarTermos}</div>
             ) : null}
           </div>
-
-          <button type="submit">Próxima Etapa</button>
+          <Link to="/cadastro/cadastrobike">
+            <button type="submit">Próxima Etapa</button>
+          </Link>
         </form>
       </div>
     </div>

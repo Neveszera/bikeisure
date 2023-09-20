@@ -1,5 +1,6 @@
 import React from 'react';
 import { useFormik } from 'formik';
+import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import './CadastroBike.css';
 
@@ -159,8 +160,9 @@ const CadastroBike = () => {
                             <div className="error-message">{formik.errors.outrasNotasFiscais}</div>
                         ) : null}
                     </div>
-
-                    <button type="submit">Próxima Etapa</button>
+                    <Link to="/cadastro/cadastrobike/vistoria">
+                        <button type="submit">Próxima Etapa</button>
+                    </Link>
                 </form>
             </div>
         </div>
