@@ -5,7 +5,7 @@ export default function Login() {
 
   return (
     <>
-      <section>
+      <section className='backgroud'>
         <div className="center">
           <h1>Entrar</h1>
           <form method="post">

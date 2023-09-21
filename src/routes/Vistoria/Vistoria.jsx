@@ -30,9 +30,9 @@ const Vistoria = () => {
     );
 
     if (bicycleDetected) {
-      setObjectDetected('bicicleta encontrada');
+      setObjectDetected('Bicicleta encontrada, foto aprovada!');
     } else {
-      setObjectDetected('sem bicicleta');
+      setObjectDetected('Sem bicicleta visível, tire uma nova foto');
     }
   };
 
@@ -52,7 +52,6 @@ const Vistoria = () => {
       <div className="vistoria-content">
         {capturedImage ? (
           <div>
-            <h2>Imagem Capturada:</h2>
             <img src={capturedImage} alt="Imagem Capturada" className="captured-image" />
             <p className="object-detected">{objectDetected}</p>
           </div>
