@@ -9,7 +9,8 @@ import Contato from './routes/Contato/Contato.jsx';
 import Home from './routes/Home/Home.jsx';
 import CadastroPessoa from './routes/CadastroPessoa/CadastroPessoa.jsx';
 import CadastroBike from './routes/CadastroBike/CadastroBike.jsx';
-import Vistoria from './routes/Vistoria/Vistoria.jsx'
+import Vistoria from './routes/Vistoria/Vistoria.jsx';
+import ExibirImagem from './routes/ExibirImagem/index.jsx';
 
 const router = createBrowserRouter([
   {
@@ -22,7 +23,8 @@ const router = createBrowserRouter([
       { path: '/contato', element: <Contato /> },
       { path: '/cadastro', element: <CadastroPessoa /> },
       { path: '/cadastro/cadastrobike', element: <CadastroBike /> },
-      { path: '/cadastro/cadastrobike/vistoria', element: <Vistoria /> }
+      { path: '/cadastro/cadastrobike/vistoria', element: <Vistoria /> },
+      { path: '/cadastro/cadastrobike/vistoria/imagem-validada', element: <ExibirImagem /> }
     ]
   }
 ]);
