@@ -7,9 +7,6 @@ import styles from './Vistoria.module.css';
 
 Modal.setAppElement('#root');
 
-const MIN_IMAGE_WIDTH = 800; // Defina a largura mínima desejada
-const MIN_IMAGE_HEIGHT = 600; // Defina a altura mínima desejada
-
 const Vistoria = () => {
   const [capturedImage, setCapturedImage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -36,7 +33,7 @@ const Vistoria = () => {
     >
       <h2>Instruções para a Etapa {currentStep}</h2>
       <p>{stepMessages[currentStep - 1]}</p>
-      <button onClick={() => setShowInstructionsModal(false)}>Fechar</button>  
+      <button onClick={() => setShowInstructionsModal(false)}>Fechar</button>
     </Modal>
   );
 
@@ -56,14 +53,7 @@ const Vistoria = () => {
       (prediction) => prediction.class === 'bicycle'
     );
 
-    // Adicione uma validação adicional para verificar a resolução
-    const imageWidth = imgElement.width;
-    const imageHeight = imgElement.height;
-
-    const isHighResolution =
-      imageWidth >= MIN_IMAGE_WIDTH && imageHeight >= MIN_IMAGE_HEIGHT;
-
-    if (isBicycleDetected && isHighResolution) {
+    if (isBicycleDetected) {
       setModalMessage('Foto aprovada! ' + stepMessages[currentStep - 1]);
       setHasBicycle(true);
       setValidatedImages((prevImages) => [...prevImages, imageSrc]);
@@ -164,9 +154,9 @@ const Vistoria = () => {
         contentLabel="Mensagem de Validação"
         className={styles['modal']}
       >
-          <h2>Validação de Foto</h2>
-          <p>{modalMessage}</p>
-          <button onClick={handleNextStep}>Ok</button>
+        <h2>Validação de Foto</h2>
+        <p>{modalMessage}</p>
+        <button onClick={handleNextStep}>Ok</button>
       </Modal>
     </div>
   );
