@@ -13,13 +13,14 @@ const Vistoria = () => {
   const [modalMessage, setModalMessage] = useState('');
   const [currentStep, setCurrentStep] = useState(1);
   const [showInstructionsModal, setShowInstructionsModal] = useState(true);
-  const [hasBicycle, setHasBicycle] = useState(false);
   const [isCapturing, setIsCapturing] = useState(false);
   const webcamRef = React.useRef(null);
   const [validatedImages, setValidatedImages] = useState([]);
+  const [validationFailed, setValidationFailed] = useState(false);
+  const [bicycleDetected, setBicycleDetected] = useState(false);
 
   const stepMessages = [
-    'Tire uma foto da bicicleta geral',
+    'Tire uma foto da bicicleta completa',
     'Tire uma foto da roda dianteira',
     'Tire uma foto da roda traseira',
     'Tire uma foto do quadro',
@@ -29,7 +30,8 @@ const Vistoria = () => {
     <Modal
       isOpen={showInstructionsModal}
       onRequestClose={() => setShowInstructionsModal(false)}
-      contentLabel="Instruções" className={styles['modal']}
+      contentLabel="Instruções"
+      className={styles['modal']}
     >
       <h2>Instruções para a Etapa {currentStep}</h2>
       <p>{stepMessages[currentStep - 1]}</p>
@@ -49,47 +51,54 @@ const Vistoria = () => {
     const model = await cocossd.load();
     const predictions = await model.detect(imgElement);
 
-    const isBicycleDetected = predictions.some(
-      (prediction) => prediction.class === 'bicycle'
-    );
+    let isValid = false;
 
-    if (isBicycleDetected) {
+    if (currentStep === 1) {
+      // Etapa da bicicleta completa
+      const bicyclePredictions = predictions.filter(
+        (prediction) => prediction.class === 'bicycle'
+      );
+
+      if (bicyclePredictions.length > 0) {
+        setBicycleDetected(true);
+        isValid = true;
+      }
+    } else if (currentStep === 2 || currentStep === 3 || currentStep === 4) {
+      // Etapas das rodas e quadro
+      isValid = predictions.some(
+        (prediction) =>
+          prediction.class === 'bicycle' && prediction.score >= 0.7
+      );
+    }
+
+    if (isValid) {
       setModalMessage('Foto aprovada! ' + stepMessages[currentStep - 1]);
-      setHasBicycle(true);
       setValidatedImages((prevImages) => [...prevImages, imageSrc]);
+      setValidationFailed(false);
     } else {
       setModalMessage('Foto não atende aos critérios, tire outra foto');
-      setHasBicycle(false);
+      setValidationFailed(true);
     }
 
     setIsCapturing(false);
-
-    // Verifique se o modal já está fechado antes de tentar abri-lo
-    if (!isModalOpen) {
-      setIsModalOpen(true);
-    }
-
-    // Verifica se todas as etapas foram concluídas e ativa o botão "Próxima Etapa"
-    if (currentStep === 4 && hasBicycle) {
-      const totalValidatedImages = validatedImages.length;
-      if (totalValidatedImages === 4) {
-        setCurrentStep(currentStep + 1);
-        setShowInstructionsModal(true);
-      }
-    }
+    setIsModalOpen(true);
   };
 
   const handleNextStep = () => {
     setIsModalOpen(false);
     setCapturedImage(null);
 
-    if (currentStep < 4 && hasBicycle) {
+    if (validationFailed) {
+      // Permanece na mesma etapa se a validação falhar
+      setShowInstructionsModal(true);
+    } else if (currentStep < 4) {
+      // Avança para a próxima etapa
       setCurrentStep(currentStep + 1);
       setShowInstructionsModal(true);
-    } else if (currentStep === 4 && hasBicycle) {
-      console.log('Imagens validadas:', validatedImages);
+      setBicycleDetected(false); // Reinicia a detecção da bicicleta
     } else {
-      setShowInstructionsModal(true);
+      // Etapa final, concluída com sucesso
+      console.log('Imagens validadas:', validatedImages);
     }
   };
 
@@ -140,12 +149,12 @@ const Vistoria = () => {
       </div>
 
       <div className={styles['vistoria-button']}>
-        {currentStep === 4 && hasBicycle ? (
+        {currentStep === 4 ? (
           <button onClick={handleNextStep}>Concluir</button>
         ) : (
           <button
             onClick={handleNextStep}
-            disabled={currentStep < 4 || !hasBicycle}
+            disabled={!capturedImage || isCapturing || !bicycleDetected}
           >
             {isCapturing ? 'Aguarde...' : 'Próxima Etapa'}
           </button>
