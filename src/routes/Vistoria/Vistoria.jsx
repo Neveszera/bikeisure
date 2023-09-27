@@ -18,6 +18,7 @@ const Vistoria = () => {
   const [validatedImages, setValidatedImages] = useState([]);
   const [validationFailed, setValidationFailed] = useState(false);
   const [bicycleDetected, setBicycleDetected] = useState(false);
+  const [isVistoriaApproved, setIsVistoriaApproved] = useState(false);
 
   const stepMessages = [
     'Tire uma foto da bicicleta completa',
@@ -67,7 +68,7 @@ const Vistoria = () => {
       // Etapas das rodas e quadro
       isValid = predictions.some(
         (prediction) =>
-          prediction.class === 'bicycle' && prediction.score >= 0.7
+          prediction.class === 'bicycle' && prediction.score >= 0.5
       );
     }
 
@@ -99,6 +100,7 @@ const Vistoria = () => {
     } else {
       // Etapa final, concluída com sucesso
       console.log('Imagens validadas:', validatedImages);
+      setIsVistoriaApproved(true);
     }
   };
 
@@ -150,7 +152,9 @@ const Vistoria = () => {
 
       <div className={styles['vistoria-button']}>
         {currentStep === 4 ? (
-          <button onClick={handleNextStep}>Concluir</button>
+          <button onClick={handleNextStep}>
+            {isVistoriaApproved ? 'Vistoria Aprovada' : 'Concluir Vistoria'}
+          </button>
         ) : (
           <button
             onClick={handleNextStep}
@@ -171,6 +175,29 @@ const Vistoria = () => {
         <p>{modalMessage}</p>
         <button onClick={handleNextStep}>Ok</button>
       </Modal>
+
+      {/* Exibindo as imagens validadas em um modal */}
+      {isVistoriaApproved && (
+        <Modal
+          isOpen={isVistoriaApproved}
+          onRequestClose={() => setIsVistoriaApproved(false)}
+          contentLabel="Imagens Validadas"
+          className={styles['modal']}
+        >
+          <h2>Vistoria Aprovada</h2>
+          <p>As imagens validadas estão abaixo:</p>
+          <div className={styles['validated-images']}>
+            {validatedImages.map((image, index) => (
+              <img
+                key={index}
+                src={image}
+                alt={`Imagem Validada ${index + 1}`}
+                className={styles['validated-image']}
+              />
+            ))}
+          </div>
+        </Modal>
+      )}
     </div>
   );
 };
