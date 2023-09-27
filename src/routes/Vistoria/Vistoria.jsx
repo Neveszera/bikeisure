@@ -34,7 +34,7 @@ const Vistoria = () => {
       contentLabel="Instruções"
       className={styles['modal']}
     >
-      <h2>Instruções para a Etapa {currentStep}</h2>
+      <h2>Instruções para a Foto {currentStep}</h2>
       <p>{stepMessages[currentStep - 1]}</p>
       <button onClick={() => setShowInstructionsModal(false)}>Fechar</button>
     </Modal>
@@ -117,8 +117,8 @@ const Vistoria = () => {
       <InstructionsModal />
       <div className={styles['vistoria-header']}>
         <h1>Bikeisure</h1>
-        <h3>Etapa {currentStep} - 4</h3>
-        <p>{stepMessages[currentStep - 1]}</p>
+        <h3>Etapa 3 - 4</h3>
+        <p>Nessa etapa faça a captura de fotos da sua bicicleta para a validação e continuação do processo de abertura</p>
       </div>
 
       <div className={styles['vistoria-content']}>
