@@ -63,7 +63,11 @@ const Vistoria = () => {
     }
 
     setIsCapturing(false);
-    setIsModalOpen(true);
+
+    // Verifique se o modal já está fechado antes de tentar abri-lo
+    if (!isModalOpen) {
+      setIsModalOpen(true);
+    }
 
     // Verifica se todas as etapas foram concluídas e ativa o botão "Próxima Etapa"
     if (currentStep === 4 && hasBicycle) {
