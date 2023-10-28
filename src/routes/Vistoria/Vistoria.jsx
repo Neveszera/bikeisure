@@ -182,7 +182,7 @@ const Vistoria = () => {
         contentLabel="Foto Aprovada"
         className={styles['modal']}
       >
-        <h2>Texto Extraído da Imagem</h2>
+        <h2>Foto Aprovada</h2>
         <p>{modalMessage}</p>
         {extractedText && (
           <div>
