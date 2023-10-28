@@ -90,6 +90,7 @@ const Vistoria = () => {
         setValidatedImages((prevImages) => [...prevImages, imageSrc]);
         setValidationFailed(false);
       } else {
+        setModalMessage('Foto Reprovada! ' + stepMessages[currentStep - 1]);
         setModalMessage('Foto não atende aos critérios, tire outra foto');
         setValidationFailed(true);
       }
@@ -182,7 +183,7 @@ const Vistoria = () => {
         contentLabel="Foto Aprovada"
         className={styles['modal']}
       >
-        <h2>Foto Aprovada</h2>
+        <h2>Validação</h2>
         <p>{modalMessage}</p>
         {extractedText && (
           <div>
