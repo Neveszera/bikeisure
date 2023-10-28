@@ -3,6 +3,7 @@ import Webcam from 'react-webcam';
 import Modal from 'react-modal';
 import * as tf from '@tensorflow/tfjs';
 import * as cocossd from '@tensorflow-models/coco-ssd';
+import Tesseract from 'tesseract.js';
 import styles from './Vistoria.module.css';
 
 Modal.setAppElement('#root');
@@ -19,12 +20,14 @@ const Vistoria = () => {
   const [validationFailed, setValidationFailed] = useState(false);
   const [bicycleDetected, setBicycleDetected] = useState(false);
   const [isVistoriaApproved, setIsVistoriaApproved] = useState(false);
+  const [extractedText, setExtractedText] = useState('');
 
   const stepMessages = [
     'Tire uma foto da bicicleta completa',
     'Tire uma foto da roda dianteira',
     'Tire uma foto da roda traseira',
     'Tire uma foto do quadro',
+    'Tire uma foto do número de série na bicicleta',
   ];
 
   const InstructionsModal = () => (
@@ -44,41 +47,52 @@ const Vistoria = () => {
     setIsCapturing(true);
 
     const imageSrc = webcamRef.current.getScreenshot();
+    setCapturedImage(imageSrc);
 
-    const imgElement = document.createElement('img');
-    imgElement.src = imageSrc;
-    await imgElement.decode();
+    if (currentStep === 5) {
+      const serialNumber = await extractSerialNumber(imageSrc);
 
-    const model = await cocossd.load();
-    const predictions = await model.detect(imgElement);
-
-    let isValid = false;
-
-    if (currentStep === 1) {
-      // Etapa da bicicleta completa
-      const bicyclePredictions = predictions.filter(
-        (prediction) => prediction.class === 'bicycle'
-      );
-
-      if (bicyclePredictions.length > 0) {
-        setBicycleDetected(true);
-        isValid = true;
+      if (serialNumber && isValidSerialNumber(serialNumber)) {
+        setModalMessage('Número de série aprovado: ' + serialNumber);
+        setExtractedText(serialNumber);
+        setValidationFailed(false);
+      } else {
+        setModalMessage('Número de série inválido, tente novamente');
+        setValidationFailed(true);
       }
-    } else if (currentStep === 2 || currentStep === 3 || currentStep === 4) {
-      // Etapas das rodas e quadro
-      isValid = predictions.some(
-        (prediction) =>
-          prediction.class === 'bicycle' && prediction.score >= 0.5
-      );
-    }
-
-    if (isValid) {
-      setModalMessage('Foto aprovada! ' + stepMessages[currentStep - 1]);
-      setValidatedImages((prevImages) => [...prevImages, imageSrc]);
-      setValidationFailed(false);
     } else {
-      setModalMessage('Foto não atende aos critérios, tire outra foto');
-      setValidationFailed(true);
+      const model = await cocossd.load();
+      const imgElement = document.createElement('img');
+      imgElement.src = imageSrc;
+      await imgElement.decode();
+      const predictions = await model.detect(imgElement);
+
+      let isValid = false;
+
+      if (currentStep === 1) {
+        const bicyclePredictions = predictions.filter(
+          (prediction) => prediction.class === 'bicycle'
+        );
+
+        if (bicyclePredictions.length > 0) {
+          setBicycleDetected(true);
+          isValid = true;
+        }
+      } else if (currentStep === 2 || currentStep === 3 || currentStep === 4) {
+        isValid = predictions.some(
+          (prediction) =>
+            prediction.class === 'bicycle' && prediction.score >= 0.5
+        );
+      }
+
+      if (isValid) {
+        setModalMessage('Foto aprovada! ' + stepMessages[currentStep - 1]);
+        setValidatedImages((prevImages) => [...prevImages, imageSrc]);
+        setValidationFailed(false);
+      } else {
+        setModalMessage('Foto não atende aos critérios, tire outra foto');
+        setValidationFailed(true);
+      }
     }
 
     setIsCapturing(false);
@@ -90,15 +104,12 @@ const Vistoria = () => {
     setCapturedImage(null);
 
     if (validationFailed) {
-      // Permanece na mesma etapa se a validação falhar
       setShowInstructionsModal(true);
-    } else if (currentStep < 4) {
-      // Avança para a próxima etapa
+    } else if (currentStep < 5) {
       setCurrentStep(currentStep + 1);
       setShowInstructionsModal(true);
-      setBicycleDetected(false); // Reinicia a detecção da bicicleta
+      setBicycleDetected(false);
     } else {
-      // Etapa final, concluída com sucesso
       console.log('Imagens validadas:', validatedImages);
       setIsVistoriaApproved(true);
     }
@@ -109,7 +120,16 @@ const Vistoria = () => {
   }, []);
 
   const mobileWebcamOptions = {
-    facingMode: 'environment', // Usa a câmera traseira do dispositivo, se disponível
+    facingMode: 'environment',
+  };
+
+  const extractSerialNumber = async (imageSrc) => {
+    const { data: { text } } = await Tesseract.recognize(imageSrc, 'eng');
+    return text;
+  };
+
+  const isValidSerialNumber = (serialNumber) => {
+    return true; 
   };
 
   return (
@@ -117,18 +137,16 @@ const Vistoria = () => {
       <InstructionsModal />
       <div className={styles['vistoria-header']}>
         <h1>Bikeisure</h1>
-        <h3>Etapa 3 - 4</h3>
-        <p>Nessa etapa faça a captura de fotos da sua bicicleta para a validação e continuação do processo de abertura</p>
+        <h3>Etapa {currentStep} - 5</h3>
+        <p>
+          Nessa etapa faça a captura de fotos da sua bicicleta para a validação e continuação do processo de abertura
+        </p>
       </div>
 
       <div className={styles['vistoria-content']}>
         {capturedImage ? (
           <div>
-            <img
-              src={capturedImage}
-              alt="Imagem Capturada"
-              className={styles['captured-image']}
-            />
+            <img src={capturedImage} alt="Imagem Capturada" className={styles['captured-image']} />
           </div>
         ) : (
           <div>
@@ -139,11 +157,7 @@ const Vistoria = () => {
               className={styles['webcam']}
               videoConstraints={mobileWebcamOptions}
             />
-            <button
-              onClick={captureImage}
-              className={styles['capture-button']}
-              disabled={isCapturing}
-            >
+            <button onClick={captureImage} className={styles['capture-button']} disabled={isCapturing}>
               {isCapturing ? 'Capturando...' : 'Capturar Imagem'}
             </button>
           </div>
@@ -151,15 +165,12 @@ const Vistoria = () => {
       </div>
 
       <div className={styles['vistoria-button']}>
-        {currentStep === 4 ? (
+        {currentStep === 5 ? (
           <button onClick={handleNextStep}>
             {isVistoriaApproved ? 'Vistoria Aprovada' : 'Concluir Vistoria'}
           </button>
         ) : (
-          <button
-            onClick={handleNextStep}
-            disabled={!capturedImage || isCapturing || !bicycleDetected}
-          >
+          <button onClick={handleNextStep} disabled={!capturedImage || isCapturing || !bicycleDetected}>
             {isCapturing ? 'Aguarde...' : 'Próxima Etapa'}
           </button>
         )}
@@ -168,15 +179,19 @@ const Vistoria = () => {
       <Modal
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}
-        contentLabel="Mensagem de Validação"
+        contentLabel="Foto Aprovada"
         className={styles['modal']}
       >
-        <h2>Validação de Foto</h2>
+        <h2>Texto Extraído da Imagem</h2>
         <p>{modalMessage}</p>
+        {extractedText && (
+          <div>
+            <p>Número de série extraído: {extractedText}</p>
+          </div>
+        )}
         <button onClick={handleNextStep}>Ok</button>
       </Modal>
 
-      {/* Exibindo as imagens validadas em um modal */}
       {isVistoriaApproved && (
         <Modal
           isOpen={isVistoriaApproved}
