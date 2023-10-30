@@ -53,7 +53,7 @@ const Vistoria = () => {
       const serialNumber = await extractSerialNumber(imageSrc);
 
       if (serialNumber && isValidSerialNumber(serialNumber)) {
-        setModalMessage('Número de série aprovado: FEF49189');
+        setModalMessage('Número de série aprovado: ' + serialNumber);
         setExtractedText(serialNumber);
         setValidationFailed(false);
       } else {
@@ -187,7 +187,7 @@ const Vistoria = () => {
         <p>{modalMessage}</p>
         {extractedText && (
           <div>
-            <p>Número de série extraído: FEF49189</p>
+            <p>Número de série extraído: {extractedText}</p>
           </div>
         )}
         <button onClick={handleNextStep}>Ok</button>
